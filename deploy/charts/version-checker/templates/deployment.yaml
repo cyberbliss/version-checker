@@ -31,7 +31,7 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: 8080
-        command: ["version-checker"]
+        command: ["/app/version-checker"]
         args:
           - "--image-cache-timeout={{.Values.versionChecker.imageCacheTimeout}}"
           - "--log-level={{.Values.versionChecker.logLevel}}"
@@ -122,6 +122,15 @@ spec:
               name: {{ $chartname }}
               key: gcr.token
         {{- end }}
+
+        # GHCR
+        {{- if .Values.ghcr.token }}
+        - name: VERSION_CHECKER_GHCR_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: {{ $chartname }}
+              key: ghcr.token
+        {{- end }}        
 
         # Quay
         {{- if .Values.quay.token }}

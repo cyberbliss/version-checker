@@ -106,3 +106,9 @@ enrich version checking on image tags:
 
 By default, version-checker will expose the version information as Prometheus
 metrics on `0.0.0.0:8080/metrics`.
+
+## Development notes
+
+VERSION.txt holds the version number that the Docker Image will be tagged with.  
+For purely local development etc, use the Makefile (`make` will display its help).  
+The source in this repo can also be compiled and built into an Image using GCP Cloud Build. This can be triggered locally using `gcloud build submit`.
